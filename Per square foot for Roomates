@@ -1,0 +1,97 @@
+name = input(prompt= "What is your name? ")
+print(f"""
+
+Hello \033[1m{name.title()}\033[0m, this program will help you find out how much rent you should be paying 
+for your room. Let's see if you and your roomate are sharing the costs evenly!
+
+{"-" * 80}
+
+""")
+#Asking for total monthly rent and total square feet of user's home.
+TotalRent = float(input(prompt = "What is the total monthly rent for your home? " ))
+TotalSqFt = int(input(prompt= "What is the total square feet of your home? "))
+
+#Explaining to the user how I want to collect her/his information.
+print(f"""
+Thanks for that!
+Traditionally, the sqaure feet of rooms are measured in length times width in the format: \033[1mx'x" by x'x"\033[0m
+I'll be asking for the length and the width of each of your rooms measured in feet and inches like the 
+format above.
+""")
+
+#Getting the dimensions for Room 1.
+Room1LengthFt = int(input(prompt = "Room 1, Length, Feet: "))
+Room1LengthIn = int(input(prompt = "Room 1, Length, Inches: "))
+Room1WidthFt = int(input(prompt = "Room 1, Width, Feet: "))
+Room1WidthIn = int(input(prompt = "Room 1,Width, Inches: "))
+
+#Sharing with user the information she/he just entered in bold writing. Leading user to next step.
+print(f"""Room 1 has the dimensions \033[1m{Room1LengthFt}'{Room1LengthIn}" x {Room1WidthFt}'{Room1WidthIn}"\033[0m.
+
+Now onto sharing the dimensions for room 2! 
+
+""")
+
+#Getting the dimensions for Room 2
+Room2LengthFt = int(input(prompt = "Room 2, Length, Feet: "))
+Room2LengthIn = int(input(prompt = "Room 2, Length, Inches: "))
+Room2WidthFt = int(input(prompt = "Room 2, Width, Feet: "))
+Room2WidthIn = int(input(prompt = "Room 2, Width, Inches: "))
+
+#Sharing with user the information she/he just entered in bold writing.Leading user to the next step.  
+print(f"""
+
+Room 2 has the dimensions \033[1m{Room2LengthFt}'{Room2LengthIn}" x {Room2WidthFt}'{Room2WidthIn}"\033[0m.
+
+Next, I am going to figure out how much each room is worth!""")
+
+#I put a pause with an input function.
+input(prompt= "<Press Enter to Continue>")
+
+#Converting Room 1 length in inches to feet and adding that number to Room 1 length in feet. Same for width.
+Room1LengthIn_to_Ft = (Room1LengthIn/12 + Room1LengthFt)
+Room1WidthIn_to_Ft = (Room1WidthIn/12 + Room1WidthFt)
+
+#Solving square feet of Room 1
+Room1SqFt = (Room1LengthIn_to_Ft * Room1WidthIn_to_Ft)
+#Solving "a la carte" cost of Room 1
+Room1Cost = (Room1SqFt/TotalSqFt) * TotalRent
+
+#Converting Room 2 length in inches to feet and adding that number to Room 2 length in feet. Same for width.
+Room2LengthIn_to_Ft = (Room2LengthIn/12 + Room2LengthFt)
+Room2WidthIn_to_Ft = (Room2WidthIn/12 + Room2WidthFt)
+
+#Solving square feet of Room 2
+Room2SqFt = (Room2LengthIn_to_Ft * Room2WidthIn_to_Ft)
+#Solving "a la carte" cost of Room 2
+Room2Cost = (Room2SqFt/TotalSqFt) * TotalRent
+
+#Solving cost of remaining rent
+RemainingRent = (TotalRent - (Room1Cost + Room2Cost))
+
+#Sharing "a la carte" price of each room to user 
+#Telling them how I will split the remaining rent for each rooms' grant total.
+print("""
+Room 1 is worth \033[1m${:.2f}\033[0m and Room 2 is worth \033[1m${:.2f}\033[0m on their own. 
+
+Next, I'll split the remaining rent payment of \033[1m${:.2f}\033[0m equally so you each know how much 
+to pay each month.""".format(Room1Cost,Room2Cost,RemainingRent))
+
+input(prompt= "<Press Enter to Continue>")
+
+#Solving for total cost for each room
+Room1TotalCost = (Room1Cost + (RemainingRent/2))
+Room2TotalCost = (Room2Cost + (RemainingRent/2))
+
+#Sharing with user the equally-divided total monthly rent for each room.
+#Welcoming user to share my program and to use it again. 
+print("""
+The person renting out room 1 will need to pay \033[1m${:.2f}\033[0m each month and the person in room 2 
+will need to pay \033[1m${:.2f}\033[0m each month. 
+
+I hope this was helpful for you! Recommend it to a friend or try this again any time you are renting out a new place.
+Cheers!
+""".format(Room1TotalCost,Room2TotalCost))
+
+#Data disclaimer statement
+print("\033[1m*The data you entered is not stored. It is erased once you close or refresh the program.\033[0m")
